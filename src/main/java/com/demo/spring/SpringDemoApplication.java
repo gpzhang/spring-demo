@@ -1,5 +1,6 @@
 package com.demo.spring;
 
+import com.demo.spring.api.DemoDao;
 import com.demo.spring.bean.Animal;
 import com.demo.spring.bean.Computer;
 import com.demo.spring.bean.People;
@@ -17,14 +18,15 @@ public class SpringDemoApplication {
 //        People people = getPeopleBeanByXml();
 //        System.out.println(people.toString());
 
-        Person person = getPersonBeanByXml();
-        System.out.println(person.getName());
+//        Person person = getPersonBeanByXml();
+//        System.out.println(person.getName());
 
 //        Animal animal = getAnimalBeanByBeanDefinitionRegister();
 //        animal.say();
 //
 //        Computer computer = getComputerBeanByFactoryBean();
 //        computer.add(1, 2);
+        aopDemo();
     }
 
     private static People getPeopleBeanByXml() {
@@ -60,5 +62,12 @@ public class SpringDemoApplication {
         //初始化spring容器，由于使用的是注解，没有xml文件，所有不再使用ClasspathXmlApplicationContext
         ApplicationContext context = new ClassPathXmlApplicationContext("spring-bean.xml");
         return (Computer) context.getBean("myFactoryBean");
+    }
+
+    private static void aopDemo() {
+        //初始化spring容器，由于使用的是注解，没有xml文件，所有不再使用ClasspathXmlApplicationContext
+        ApplicationContext context = new ClassPathXmlApplicationContext("spring-bean.xml");
+        DemoDao demoDao = (DemoDao) context.getBean("demoDaoImpl");
+        demoDao.insert();
     }
 }

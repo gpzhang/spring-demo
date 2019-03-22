@@ -9,6 +9,10 @@ import org.springframework.beans.factory.FactoryBean;
  */
 public class MyFactoryBean<T> implements FactoryBean<T> {
 
+    public MyFactoryBean() {
+        System.out.println("实例化MyFactoryBean");
+    }
+
     @Override
     public T getObject() throws Exception {
         Computer computer = new Computer();

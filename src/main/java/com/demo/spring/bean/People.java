@@ -12,6 +12,10 @@ public class People {
     private String name;
     private Integer age;
 
+    public People() {
+        System.out.println("实例化People");
+    }
+
     public String getId() {
         return id;
     }

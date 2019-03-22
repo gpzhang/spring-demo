@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 /**
  * @author haishen
  * @date 2018/8/2
+ * 注解扫描注入bean
  */
 @Component
 public class Animal {

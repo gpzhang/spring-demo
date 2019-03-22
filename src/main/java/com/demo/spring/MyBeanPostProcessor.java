@@ -12,11 +12,15 @@ import org.springframework.beans.factory.config.BeanPostProcessor;
  */
 public class MyBeanPostProcessor implements BeanPostProcessor {
 
+    public MyBeanPostProcessor() {
+        System.out.println("实例化MyBeanPostProcessor");
+    }
+
     @Override
     public Object postProcessBeforeInitialization(Object o, String s) throws BeansException {
         System.out.println("postProcessBeforeInitialization被调用" + "[Object:" + o + "],[String:" + s + "]");
         if (o instanceof Person) {
-            ((Person) o).setName("sb");
+            ((Person) o).setName("hs03");
         }
         return o;
     }
@@ -24,6 +28,9 @@ public class MyBeanPostProcessor implements BeanPostProcessor {
     @Override
     public Object postProcessAfterInitialization(Object o, String s) throws BeansException {
         System.out.println("postProcessAfterInitialization被调用" + "[Object:" + o + "],[String:" + s + "]");
+        if (o instanceof Person) {
+            ((Person) o).setName("hs04");
+        }
         return o;
     }
 }

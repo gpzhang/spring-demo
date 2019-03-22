@@ -7,6 +7,10 @@ package com.demo.spring.bean;
  */
 public class Computer {
 
+    public Computer(){
+        System.out.println("实例化Computer");
+    }
+
     private Integer type;
 
     public Integer getType() {
