@@ -63,3 +63,31 @@ public void refresh() throws BeansException, IllegalStateException {
 		}
 	}
 ```
+
+
+* 2、从xml中读取的bean信息持有对象注册到BeanFactory中
+```text
+
+/**
+	 * Process the given bean element, parsing the bean definition
+	 * and registering it with the registry.
+	 */
+	protected void processBeanDefinition(Element ele, BeanDefinitionParserDelegate delegate) {
+	    //根据 <bean /> 配置创建了一个 BeanDefinitionHolder 实例
+		BeanDefinitionHolder bdHolder = delegate.parseBeanDefinitionElement(ele);
+		if (bdHolder != null) {
+			bdHolder = delegate.decorateBeanDefinitionIfRequired(ele, bdHolder);
+			try {
+				// 将创建的BeanDefinition实例注册到BeanFactory中,不是真正我们的自建的类对象,
+				// 只是一个封装了我们自建的类信息的实例对象BeanDefinition
+				BeanDefinitionReaderUtils.registerBeanDefinition(bdHolder, getReaderContext().getRegistry());
+			}
+			catch (BeanDefinitionStoreException ex) {
+				getReaderContext().error("Failed to register bean definition with name '" +
+						bdHolder.getBeanName() + "'", ele, ex);
+			}
+			// Send registration event.
+			getReaderContext().fireComponentRegistered(new BeanComponentDefinition(bdHolder));
+		}
+	}
+```
