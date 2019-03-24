@@ -67,7 +67,7 @@ public void refresh() throws BeansException, IllegalStateException {
 
 * 2、从xml中读取的bean信息持有对象注册到BeanFactory中
 ```text
-
+对应类：org/springframework/beans/factory/xml/DefaultBeanDefinitionDocumentReader.class
 /**
 	 * Process the given bean element, parsing the bean definition
 	 * and registering it with the registry.
