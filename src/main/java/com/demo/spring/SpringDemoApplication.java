@@ -18,7 +18,7 @@ public class SpringDemoApplication {
 //        People people = getPeopleBeanByXml();
 //        System.out.println(people.toString());
 
-//        Person person = getPersonBeanByXml();
+        Person person = getPersonBeanByXml();
 //        System.out.println(person.getName());
 
 //        Animal animal = getAnimalBeanByBeanDefinitionRegister();
@@ -26,7 +26,7 @@ public class SpringDemoApplication {
 //
 //        Computer computer = getComputerBeanByFactoryBean();
 //        computer.add(1, 2);
-        aopDemo();
+//        aopDemo();
     }
 
     private static People getPeopleBeanByXml() {
@@ -36,7 +36,8 @@ public class SpringDemoApplication {
 
     private static Person getPersonBeanByXml() {
         ApplicationContext ctx = new ClassPathXmlApplicationContext("spring-bean.xml");
-        return (Person) ctx.getBean("person");
+        return null;
+//        return (Person) ctx.getBean("person");
     }
 
     private static Animal getAnimalBeanByBeanDefinitionRegister() {

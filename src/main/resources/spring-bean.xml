@@ -3,7 +3,9 @@
        xmlns:cutesource="http://www.hs.com/schema/people" xmlns:context="http://www.springframework.org/schema/context"
        xmlns:aop="http://www.springframework.org/schema/aop"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
-       http://www.hs.com/schema/people http://www.hs.com/schema/people.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+       http://www.hs.com/schema/people http://www.hs.com/schema/people.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
     <context:annotation-config/>
 
@@ -31,6 +33,7 @@
             <aop:before method="accessBefore" pointcut-ref="addAllMethod"/>
             <aop:after method="accessAfter" pointcut-ref="addAllMethod"/>
         </aop:aspect>
+
     </aop:config>
 
 </beans>
