@@ -1,10 +1,7 @@
 package com.demo.spring;
 
 import com.demo.spring.api.DemoDao;
-import com.demo.spring.bean.Animal;
-import com.demo.spring.bean.Computer;
-import com.demo.spring.bean.People;
-import com.demo.spring.bean.Person;
+import com.demo.spring.bean.*;
 import org.springframework.beans.MutablePropertyValues;
 import org.springframework.beans.PropertyValue;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
@@ -15,14 +12,14 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class SpringDemoApplication {
 
     public static void main(String[] args) {
+        getLibraryByXml();
 //        People people = getPeopleBeanByXml();
-//        System.out.println(people.toString());
 
-        Person person = getPersonBeanByXml();
-//        System.out.println(person.getName());
+//        Person person = getPersonBeanByXml();
 
 //        Animal animal = getAnimalBeanByBeanDefinitionRegister();
-//        animal.say();
+
+//        Library book = getBookByZhujie();
 //
 //        Computer computer = getComputerBeanByFactoryBean();
 //        computer.add(1, 2);
@@ -30,14 +27,21 @@ public class SpringDemoApplication {
     }
 
     private static People getPeopleBeanByXml() {
+        //初始化spring容器，使用xml文件，所以用ClasspathXmlApplicationContext
         ApplicationContext ctx = new ClassPathXmlApplicationContext("spring-bean.xml");
-        return (People) ctx.getBean("cutesource");
+        People people = (People) ctx.getBean("cutesource");
+        System.out.println(people.toString());
+        return people;
     }
 
     private static Person getPersonBeanByXml() {
+        //初始化spring容器，使用xml文件，所以用ClasspathXmlApplicationContext
         ApplicationContext ctx = new ClassPathXmlApplicationContext("spring-bean.xml");
         return null;
-//        return (Person) ctx.getBean("person");
+
+//        Person person = (Person) ctx.getBean("person");
+//        System.out.println(person.getName());
+//        return person;
     }
 
     private static Animal getAnimalBeanByBeanDefinitionRegister() {
@@ -56,19 +60,37 @@ public class SpringDemoApplication {
         beanFactory.registerBeanDefinition("animal", bd);
         beanFactory.preInstantiateSingletons();
         //4、使用bean
-        return (Animal) beanFactory.getBean("animal");
+        Animal animal = (Animal) beanFactory.getBean("animal");
+        animal.say();
+        return animal;
     }
 
     private static Computer getComputerBeanByFactoryBean() {
-        //初始化spring容器，由于使用的是注解，没有xml文件，所有不再使用ClasspathXmlApplicationContext
+        //初始化spring容器，使用xml文件，所以用ClasspathXmlApplicationContext
         ApplicationContext context = new ClassPathXmlApplicationContext("spring-bean.xml");
         return (Computer) context.getBean("myFactoryBean");
     }
 
     private static void aopDemo() {
-        //初始化spring容器，由于使用的是注解，没有xml文件，所有不再使用ClasspathXmlApplicationContext
+        //初始化spring容器，使用xml文件，所以用ClasspathXmlApplicationContext
         ApplicationContext context = new ClassPathXmlApplicationContext("spring-bean.xml");
         DemoDao demoDao = (DemoDao) context.getBean("demoDaoImpl");
         demoDao.insert();
+    }
+
+    private static Book getBookByZhujie() {
+        //初始化spring容器，使用xml文件，所以用ClasspathXmlApplicationContext
+        ApplicationContext context = new ClassPathXmlApplicationContext("spring-bean.xml");
+        Book book = (Book) context.getBean("book");
+        book.say();
+        return book;
+    }
+
+    private static Library getLibraryByXml() {
+        //初始化spring容器，使用xml文件，所以用ClasspathXmlApplicationContext
+        ApplicationContext context = new ClassPathXmlApplicationContext("spring-bean.xml");
+        Library library = (Library) context.getBean("library");
+        library.say();
+        return library;
     }
 }

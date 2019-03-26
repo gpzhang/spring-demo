@@ -1,16 +1,18 @@
 package com.demo.spring.bean;
 
+import org.springframework.stereotype.Component;
+
 /**
  * @author haishen
- * @date 2018/8/2
- * 注解扫描注入bean
+ * @date 2019/3/26
  */
-public class Animal {
+@Component
+public class Book {
 
     private String name;
 
-    public Animal() {
-        System.out.println("实例化Animal");
+    public Book() {
+        System.out.println("实例化Book");
     }
 
     public String getName() {

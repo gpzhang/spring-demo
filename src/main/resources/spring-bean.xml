@@ -1,39 +1,46 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:cutesource="http://www.hs.com/schema/people" xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:cutesource="http://www.hs.com/schema/people"
+       xmlns:context="http://www.springframework.org/schema/context"
        xmlns:aop="http://www.springframework.org/schema/aop"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
        http://www.hs.com/schema/people http://www.hs.com/schema/people.xsd
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
-    <context:annotation-config/>
-
     <context:component-scan base-package="com.demo.spring"/>
 
-    <!-- -->
-    <cutesource:people id="cutesource" name="海参" age="27"/>
+    <context:annotation-config/>
 
-    <bean id="myFactoryBean" class="com.demo.spring.MyFactoryBean"/>
+    <!--自定义标签 -->
+    <!--<cutesource:people-key id="cutesource" name="海参" age="27"/>-->
 
-    <bean id="person" class="com.demo.spring.bean.Person" init-method="init">
-        <property name="name" value="hs01"/>
+    <!--<bean id="myFactoryBean" class="com.demo.spring.MyFactoryBean"/>-->
+
+    <!--<bean id="person" class="com.demo.spring.bean.Person" init-method="init">-->
+        <!--<property name="name" value="hs01"/>-->
+    <!--</bean>-->
+    <!---->
+    <!--<bean id="beanPostProcessor" class="com.demo.spring.MyBeanPostProcessor"/>-->
+
+    <!--<bean id="beanFactoryPostProcessor" class="com.demo.spring.MyBeanFactoryPostProcessor"/>-->
+
+    <!--<bean id="demoDaoImpl" class="com.demo.spring.impl.DemoDaoImpl"/>-->
+
+    <!--<bean id="accessDdAop" class="com.demo.spring.aop.AccessDdAop"/>-->
+
+    <!--<aop:config proxy-target-class="true">-->
+        <!--<aop:aspect id="accessDdAop" ref="accessDdAop">-->
+            <!--<aop:pointcut id="addAllMethod" expression="execution(* com.demo.spring.impl.DemoDaoImpl.*(..))"/>-->
+            <!--<aop:before method="accessBefore" pointcut-ref="addAllMethod"/>-->
+            <!--<aop:after method="accessAfter" pointcut-ref="addAllMethod"/>-->
+        <!--</aop:aspect>-->
+
+    <!--</aop:config>-->
+
+    <bean id="library" class="com.demo.spring.bean.Library">
+        <property name="name" value="nb-library"/>
+        <property name="book" ref="book"/>
     </bean>
-
-    <bean id="beanPostProcessor" class="com.demo.spring.MyBeanPostProcessor"/>
-
-    <bean id="beanFactoryPostProcessor" class="com.demo.spring.MyBeanFactoryPostProcessor"/>
-
-    <bean id="demoDaoImpl" class="com.demo.spring.impl.DemoDaoImpl"/>
-    <bean id="accessDdAop" class="com.demo.spring.aop.AccessDdAop"/>
-
-    <aop:config proxy-target-class="true">
-        <aop:aspect id="accessDdAop" ref="accessDdAop">
-            <aop:pointcut id="addAllMethod" expression="execution(* com.demo.spring.impl.DemoDaoImpl.*(..))"/>
-            <aop:before method="accessBefore" pointcut-ref="addAllMethod"/>
-            <aop:after method="accessAfter" pointcut-ref="addAllMethod"/>
-        </aop:aspect>
-
-    </aop:config>
 
 </beans>

@@ -42,6 +42,6 @@ public class People {
 
     @Override
     public String toString() {
-        return "id:" + this.getId() + ",name:" + this.getName();
+        return "People实例化对象,id:" + this.getId() + ",name:" + this.getName();
     }
 }

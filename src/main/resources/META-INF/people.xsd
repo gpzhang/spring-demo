@@ -9,7 +9,7 @@
 
     <xsd:import namespace="http://www.springframework.org/schema/beans"/>
 
-    <xsd:element name="people" type="po">
+    <xsd:element name="people-key" type="po">
     </xsd:element>
 
     <xsd:complexType name="po">
