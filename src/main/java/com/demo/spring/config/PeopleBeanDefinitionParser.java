@@ -21,6 +21,7 @@ public class PeopleBeanDefinitionParser extends AbstractSingleBeanDefinitionPars
 
     @Override
     protected void doParse(Element element, BeanDefinitionBuilder bean) {
+        System.out.println("执行自定义解析器之PeopleBeanDefinitionParser");
         String name = element.getAttribute("name");
         String age = element.getAttribute("age");
         String id = element.getAttribute("id");

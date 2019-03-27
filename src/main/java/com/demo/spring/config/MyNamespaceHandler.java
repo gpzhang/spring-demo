@@ -14,6 +14,7 @@ import org.springframework.beans.factory.xml.NamespaceHandlerSupport;
 public class MyNamespaceHandler extends NamespaceHandlerSupport {
     @Override
     public void init() {
+        System.out.println("执行NamespaceHandler之MyNamespaceHandler");
         registerBeanDefinitionParser("people-key", new PeopleBeanDefinitionParser());
     }
 }

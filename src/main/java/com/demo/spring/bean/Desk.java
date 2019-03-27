@@ -4,15 +4,15 @@ import org.springframework.stereotype.Component;
 
 /**
  * @author haishen
- * @date 2019/3/26
+ * @date 2019/3/27
  */
 @Component
-public class Book {
+public class Desk {
 
-    private String name="java";
+    private String name = "A01";
 
-    public Book() {
-        System.out.println("实例化Book");
+    public Desk() {
+        System.out.println("实例化Desk");
     }
 
     public String getName() {
