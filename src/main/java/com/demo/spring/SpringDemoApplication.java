@@ -15,7 +15,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class SpringDemoApplication {
 
     public static void main(String[] args) {
-        quanZhuJie();
+//        quanZhuJie();
 //        getLibraryByXml();
 //        People people = getPeopleBeanByXml();
 
@@ -27,7 +27,7 @@ public class SpringDemoApplication {
 //
 //        Computer computer = getComputerBeanByFactoryBean();
 //        computer.add(1, 2);
-//        aopDemo();
+        aopDemo();
     }
 
     private static People getPeopleBeanByXml() {

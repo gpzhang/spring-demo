@@ -1,9 +1,10 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
 
-       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
     <context:component-scan base-package="com.demo.spring" annotation-config="false"/>
     <context:annotation-config/>
@@ -25,22 +26,28 @@
 
     <!--<bean id="beanFactoryPostProcessor" class="com.demo.spring.MyBeanFactoryPostProcessor"/>-->
 
-    <!--<bean id="demoDaoImpl" class="com.demo.spring.impl.DemoDaoImpl"/>-->
+    <bean id="demoDaoImpl" class="com.demo.spring.impl.DemoDaoImpl"/>
 
-    <!--<bean id="accessDdAop" class="com.demo.spring.aop.AccessDdAop"/>-->
+    <bean id="accessDdAop" class="com.demo.spring.aop.AccessDdAop"/>
 
-    <!--<aop:config proxy-target-class="true">-->
-    <!--<aop:aspect id="accessDdAop" ref="accessDdAop">-->
-    <!--<aop:pointcut id="addAllMethod" expression="execution(* com.demo.spring.impl.DemoDaoImpl.*(..))"/>-->
-    <!--<aop:before method="accessBefore" pointcut-ref="addAllMethod"/>-->
-    <!--<aop:after method="accessAfter" pointcut-ref="addAllMethod"/>-->
-    <!--</aop:aspect>-->
+    <!--<bean id="accessDbAdvice" class="com.demo.spring.aop.AccessDbAdvice"/>-->
 
-    <!--</aop:config>-->
+    <aop:config proxy-target-class="true">
+        <!--定义<aop:advisor>中引用的通知时，通知必须实现Advice接口。-->
+        <!--<aop:pointcut id="allMethod" expression="execution(* com.demo.spring.impl.DemoDaoImpl.*(..))"/>-->
+        <!--<aop:advisor advice-ref="accessDbAdvice" pointcut-ref="allMethod"/>-->
 
-    <bean id="library" class="com.demo.spring.bean.Library">
-        <property name="name" value="nb-library"/>
-        <property name="book" ref="book"/>
-    </bean>
+        <!--< aop:aspect>定义切面时，只需要定义一般的bean就行-->
+        <aop:aspect ref="accessDdAop">
+            <aop:pointcut id="inner-allMethod" expression="execution(* com.demo.spring.impl.DemoDaoImpl.select())"/>
+            <aop:before method="accessBefore" pointcut-ref="inner-allMethod"/>
+            <aop:after method="accessAfter" pointcut-ref="inner-allMethod"/>
+        </aop:aspect>
+    </aop:config>
+
+    <!--<bean id="library" class="com.demo.spring.bean.Library">-->
+    <!--<property name="name" value="nb-library"/>-->
+    <!--<property name="book" ref="book"/>-->
+    <!--</bean>-->
 
 </beans>
