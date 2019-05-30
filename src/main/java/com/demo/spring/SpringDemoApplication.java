@@ -41,11 +41,11 @@ public class SpringDemoApplication {
     private static Person getPersonBeanByXml() {
         //初始化spring容器，使用xml文件，所以用ClasspathXmlApplicationContext
         ApplicationContext ctx = new ClassPathXmlApplicationContext("spring-bean.xml");
-        return null;
+//        return null;
 
-//        Person person = (Person) ctx.getBean("person");
-//        System.out.println(person.getName());
-//        return person;
+        Person person = (Person) ctx.getBean("person");
+        System.out.println(person.getName());
+        return person;
     }
 
     private static Animal getAnimalBeanByBeanDefinitionRegister() {
@@ -79,7 +79,9 @@ public class SpringDemoApplication {
         //初始化spring容器，使用xml文件，所以用ClasspathXmlApplicationContext
         ApplicationContext context = new ClassPathXmlApplicationContext("spring-bean.xml");
         DemoDao demoDao = (DemoDao) context.getBean("demoDaoImpl");
-        demoDao.insert();
+        DemoDao demoDao2 = (DemoDao) context.getBean("demoDaoImpl");
+        System.out.println("demoDaoImpl:" + demoDao);
+        demoDao.select();
     }
 
     private static Book getBookByZhujie() {

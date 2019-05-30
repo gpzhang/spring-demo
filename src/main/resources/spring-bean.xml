@@ -1,43 +1,55 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:cutesource="http://www.hs.com/schema/people01"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
 
-       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd http://www.hs.com/schema/people01 http://www.hs.com/schema/people.xsd">
+
+    <context:property-placeholder location="classpath:application.properties"/>
 
     <context:component-scan base-package="com.demo.spring" annotation-config="false"/>
     <context:annotation-config/>
-
     <!--或者可以只是用-->
     <!--<context:component-scan base-package="com.demo.spring"/>-->
 
 
+    <!-- 启动AspectJ自动代理 -->
+    <!--<aop:aspectj-autoproxy/>-->
+
+
     <!--自定义标签 -->
-    <!--<cutesource:people-key id="cutesource" name="海参" age="27"/>-->
+    <cutesource:people-key id="cutesource" name="海参" age="27"/>
 
-    <!--<bean id="myFactoryBean" class="com.demo.spring.MyFactoryBean"/>-->
+    <bean id="myFactoryBean" class="com.demo.spring.MyFactoryBean"/>
 
-    <!--<bean id="person" class="com.demo.spring.bean.Person" init-method="init">-->
-    <!--<property name="name" value="hs01"/>-->
-    <!--</bean>-->
+    <bean id="person" class="com.demo.spring.bean.Person" init-method="init">
+        <property name="name" value="${person.name}"/>
+    </bean>
     <!---->
-    <!--<bean id="beanPostProcessor" class="com.demo.spring.MyBeanPostProcessor"/>-->
+    <bean id="beanPostProcessor" class="com.demo.spring.MyBeanPostProcessor"/>
 
-    <!--<bean id="beanFactoryPostProcessor" class="com.demo.spring.MyBeanFactoryPostProcessor"/>-->
+    <bean id="beanFactoryPostProcessor" class="com.demo.spring.MyBeanFactoryPostProcessor"/>
 
     <bean id="demoDaoImpl" class="com.demo.spring.impl.DemoDaoImpl"/>
 
     <bean id="accessDdAop" class="com.demo.spring.aop.AccessDdAop"/>
 
+    <!--实现具体的增强功能的切入点，方法前还是方法后-->
     <!--<bean id="accessDbAdvice" class="com.demo.spring.aop.AccessDbAdvice"/>-->
+    <!--<bean id="accessDbBeforeAdvice" class="com.demo.spring.aop.AccessDbBeforeAdvice"/>-->
+    <!--<bean id="accessDbAfterAdvice" class="com.demo.spring.aop.AccessDbAfterAdvice"/>-->
 
+    <!--proxy-target-class="false"使用jdk的动态代理 默认配置,proxy-target-class="true"使用cglib的动态代理-->
     <aop:config proxy-target-class="true">
-        <!--定义<aop:advisor>中引用的通知时，通知必须实现Advice接口。-->
+        <!--如果使用aop:advisor配置,那么切面逻辑必须要实现advice接口才行!否则会失败!-->
+        <!--指定切入点，即指定要增强的业务方法-->
         <!--<aop:pointcut id="allMethod" expression="execution(* com.demo.spring.impl.DemoDaoImpl.*(..))"/>-->
-        <!--<aop:advisor advice-ref="accessDbAdvice" pointcut-ref="allMethod"/>-->
+        <!--&lt;!&ndash;定义通知器（通知器跟切面一样，也包括增强的功能和功能切点）,对指定的切入点加入指定增强功能&ndash;&gt;-->
+        <!--<aop:advisor advice-ref="accessDbBeforeAdvice" pointcut-ref="allMethod"/>-->
+        <!--<aop:advisor advice-ref="accessDbAfterAdvice" pointcut-ref="allMethod"/>-->
 
-        <!--< aop:aspect>定义切面时，只需要定义一般的bean就行-->
+        <!--< aop:aspect>定义切面，只需要定义一般的bean就行-->
         <aop:aspect ref="accessDdAop">
             <aop:pointcut id="inner-allMethod" expression="execution(* com.demo.spring.impl.DemoDaoImpl.select())"/>
             <aop:before method="accessBefore" pointcut-ref="inner-allMethod"/>
@@ -45,9 +57,9 @@
         </aop:aspect>
     </aop:config>
 
-    <!--<bean id="library" class="com.demo.spring.bean.Library">-->
-    <!--<property name="name" value="nb-library"/>-->
-    <!--<property name="book" ref="book"/>-->
-    <!--</bean>-->
+    <bean id="library" class="com.demo.spring.bean.Library">
+        <property name="name" value="nb-library"/>
+        <property name="book" ref="book"/>
+    </bean>
 
 </beans>

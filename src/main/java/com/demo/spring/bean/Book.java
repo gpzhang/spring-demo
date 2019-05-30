@@ -9,10 +9,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class Book {
 
-    private String name="java";
+    private String name = "java";
 
     public Book() {
-        System.out.println("实例化Book");
+        System.out.println("实例化Book," + "Thread:[" + Thread.currentThread().getName() + "]");
     }
 
     public String getName() {
