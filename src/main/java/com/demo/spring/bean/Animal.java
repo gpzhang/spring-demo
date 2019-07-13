@@ -3,7 +3,6 @@ package com.demo.spring.bean;
 /**
  * @author haishen
  * @date 2018/8/2
- * 注解扫描注入bean
  */
 public class Animal {
 

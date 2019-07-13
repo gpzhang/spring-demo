@@ -8,10 +8,6 @@
 
     <context:property-placeholder location="classpath:application.properties"/>
 
-    <!--<context:component-scan base-package="com.demo.spring" annotation-config="false"/>-->
-    <!--<context:annotation-config/>-->
-    <!--或者可以只是用-->
-    <context:component-scan base-package="com.demo.spring"/>
 
     <!--自定义标签 -->
     <cutesource:people-key id="cutesource" name="海参" age="27"/>
@@ -26,9 +22,5 @@
 
     <bean id="beanFactoryPostProcessor" class="com.demo.spring.MyBeanFactoryPostProcessor"/>
 
-    <bean id="library" class="com.demo.spring.bean.Library">
-        <property name="name" value="nb-library"/>
-        <property name="book" ref="book"/>
-    </bean>
 
 </beans>
