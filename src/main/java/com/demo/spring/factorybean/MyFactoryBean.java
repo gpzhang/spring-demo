@@ -1,4 +1,4 @@
-package com.demo.spring;
+package com.demo.spring.factorybean;
 
 import com.demo.spring.bean.Computer;
 import org.springframework.beans.factory.FactoryBean;

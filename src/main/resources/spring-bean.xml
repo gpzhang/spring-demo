@@ -12,15 +12,15 @@
     <!--自定义标签 -->
     <cutesource:people-key id="cutesource" name="海参" age="27"/>
 
-    <bean id="myFactoryBean" class="com.demo.spring.MyFactoryBean"/>
+    <bean id="myFactoryBean" class="com.demo.spring.factorybean.MyFactoryBean"/>
 
     <bean id="person" class="com.demo.spring.bean.Person" init-method="init">
         <property name="name" value="${person.name}"/>
     </bean>
     <!---->
-    <bean id="beanPostProcessor" class="com.demo.spring.MyBeanPostProcessor"/>
+    <bean id="beanPostProcessor" class="com.demo.spring.beanpostprocessor.MyBeanPostProcessor"/>
 
-    <bean id="beanFactoryPostProcessor" class="com.demo.spring.MyBeanFactoryPostProcessor"/>
+    <bean id="beanFactoryPostProcessor" class="com.demo.spring.beanfactorypostprocessor.MyBeanFactoryPostProcessor"/>
 
 
 </beans>

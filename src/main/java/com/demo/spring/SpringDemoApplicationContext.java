@@ -27,9 +27,8 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  * 相同：都是加载bean
  * 区别：
  * bean的加载时机不同，BeanFactory当调用getBean的时候，才会实时实例化该bean对象；
- * ApplicationContext容器启动完成后就会加载非懒加载的bean。
+ * ApplicationContext容器启动完成后就会加载非懒加载的单例bean。
  * ApplicationContext除了提供BeanFactory所能提供的功能之外，还提供了更多的框架功能
- *
  *
  * @author haishen
  */
@@ -48,6 +47,11 @@ public class SpringDemoApplicationContext {
 //        computer.add(1, 2);
     }
 
+    /**
+     * 一个通过自定义标签管理的bean的加载
+     *
+     * @return
+     */
     private static People getPeopleBeanByXml() {
         //初始化spring容器，使用xml文件，所以用ClasspathXmlApplicationContext
         ApplicationContext context = new ClassPathXmlApplicationContext("spring-bean.xml");
@@ -56,12 +60,28 @@ public class SpringDemoApplicationContext {
         return people;
     }
 
+    /**
+     * 一个涵盖了bean生命周期重要节点的bean的加载
+     *
+     * @return
+     */
     private static Person getPersonBeanByXml() {
         //初始化spring容器，使用xml文件，所以用ClasspathXmlApplicationContext
         ApplicationContext context = new ClassPathXmlApplicationContext("spring-bean.xml");
         Person person = (Person) context.getBean("person");
         System.out.println(person.getName());
         return person;
+    }
+
+    /**
+     * 获取实现了FactoryBean接口的bean
+     *
+     * @return
+     */
+    private static Computer getComputerBeanByFactoryBean() {
+        //初始化spring容器，使用xml文件，所以用ClasspathXmlApplicationContext
+        ApplicationContext context = new ClassPathXmlApplicationContext("spring-bean.xml");
+        return (Computer) context.getBean("myFactoryBean");
     }
 
     private static Animal getAnimalBeanByBeanDefinitionRegister() {
@@ -85,10 +105,5 @@ public class SpringDemoApplicationContext {
         return animal;
     }
 
-    private static Computer getComputerBeanByFactoryBean() {
-        //初始化spring容器，使用xml文件，所以用ClasspathXmlApplicationContext
-        ApplicationContext context = new ClassPathXmlApplicationContext("spring-bean.xml");
-        return (Computer) context.getBean("myFactoryBean");
-    }
 
 }

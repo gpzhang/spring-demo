@@ -23,7 +23,7 @@ public class SpringDemoBeanFactory {
 
 
     private static Person getPersonBeanByXml() {
-        //初始化spring容器，使用xml文件，所以用ClasspathXmlApplicationContext
+        //初始化spring容器，使用xml文件，所以用XmlBeanFactory
         BeanFactory factory = new XmlBeanFactory(new ClassPathResource("spring-bean.xml"));
         Person person = (Person) factory.getBean("person");
         System.out.println(person.getName());

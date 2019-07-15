@@ -1,5 +1,6 @@
 package com.demo.spring.bean;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -8,6 +9,9 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class Book {
+
+    @Autowired
+    private Desk desk;
 
     private String name = "java";
 
@@ -24,6 +28,6 @@ public class Book {
     }
 
     public void say() {
-        System.out.println("Hello " + name);
+        System.out.println("desk:[" + desk + "],book:[" + name + "]");
     }
 }

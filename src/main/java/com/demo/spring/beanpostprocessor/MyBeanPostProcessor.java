@@ -1,4 +1,4 @@
-package com.demo.spring;
+package com.demo.spring.beanpostprocessor;
 
 import com.demo.spring.bean.Person;
 import org.springframework.beans.BeansException;
