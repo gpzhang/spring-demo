@@ -26,6 +26,12 @@ public class SpringXmlScanApplicationContext {
 
     /**
      * 类级别的注解定义的bean的加载，以及属性注解
+     * 1、解析注解扫描的标签<context:component-scan base-package="com.demo.spring" annotation-config="false"/>
+     * 创建扫描器对象ClassPathBeanDefinitionScanner
+     * 2、扫描器对象ClassPathBeanDefinitionScanner扫描指定包路径下的类，过滤出带有@Component类型注解的实现类,
+     * 注册到spring容器中,作为可以被spring管理的bean
+     * 3、发送注册完成通知事件，同时根据配置信息（annotation-config=true）判断是否添加属性注解的处理器注册
+     * 4、等到创建bean的时候（具体是对已创建的bean填充属性的时候）使用这些注解处理器
      *
      * @return
      */
@@ -38,5 +44,12 @@ public class SpringXmlScanApplicationContext {
         return book;
     }
 
+
+/**
+ * 循环依赖的问题
+ * 单例的bean，通过set注入的循环依赖，可以被解决，解决方法通过缓存拿到依赖的bean
+ * 单例的bean，通过有参构造函数注入的循环依赖，不可以被解决，因为通过缓存拿不到依赖的bean
+ * 原型模式的循环依赖无法解决，抛出异常，因为原型模式的bean依赖时直接创建，不会缓存
+ */
 
 }
